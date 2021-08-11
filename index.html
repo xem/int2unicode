@@ -1,0 +1,36 @@
+<h1>Int to Unicode</h1>
+
+<p>Convert a list of integers into a JS string
+<br>In UTF-8, numbers 0-127 are encoded on 1 byte (ASCII), 128-2047: 2 bytes, 2048-65535: 3 bytes, 65536-1114111: 4 bytes</p>
+
+<textarea id=input rows=5 cols=100>[0,1,2,8,9,10,11,12,13,32,33,34,35,91,92,93,0b00111111,126,0x7F,255,0x1f440,1114111] // edit me!</textarea>
+
+<br><br>
+ASCII JS string (chars 0-32 and 127-159 are invisible, chars \0, \r, \n, " and \ are escaped)
+
+<textarea id=output rows=5 cols=100></textarea>
+
+<br><br>
+Tiny JS decoder (to retrieve your list of numbers): <b>[...str].map(a=>a.codePointAt())</b>
+
+
+
+
+<script>
+onload = input.oninput = () => {
+  e = eval(input.value);
+  s = 'str="';
+  for(i in e){
+    console.log(e[i])
+    if(e[i] == 0) s+= '\\0';
+    else if(e[i] == 10) s+= '\\n';
+    else if(e[i] == 13) s+= '\\r';
+    else if(e[i] == 34) s+= '\\"';
+    else if(e[i] == 92) s+= '\\';
+    else s += String.fromCodePoint(e[i]);
+  }
+  s+='"';
+  output.value = s;
+}
+
+</script>
