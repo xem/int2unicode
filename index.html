@@ -26,7 +26,7 @@ onload = input.oninput = () => {
     else if(e[i] == 10) s+= '\\n';
     else if(e[i] == 13) s+= '\\r';
     else if(e[i] == 34) s+= '\\"';
-    else if(e[i] == 92) s+= '\\';
+    else if(e[i] == 92) s+= '\\\\';
     else s += String.fromCodePoint(e[i]);
   }
   s+='"';
